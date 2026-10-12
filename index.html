@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Sebastián Flores – Técnico informático. Soporte IT y Help Desk, con proyección a Sysadmin y DevOps. Florencio Varela, Buenos Aires.">
+<meta property="og:title" content="Sebastián Flores | Soporte IT">
+<meta property="og:description" content="Técnico informático. Soporte IT y Help Desk, con proyección a Sysadmin y DevOps.">
+<meta property="og:type" content="website">
+<title>Sebastián Flores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: barra superior fija + columna única; hero con "ficha de estado" estilo panel de monitoreo; secciones en bandas */
+:root{
+  --bg:#0e141b; --surface:#151e28; --line:#243241; --fg:#e6ecf2; --muted:#93a3b4;
+  --accent:#f2a93b; --accent-ink:#1a1206; --ok:#4cc38a; --learn:#7aa7ff;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){
+  --bg:#f3f5f8; --surface:#ffffff; --line:#d8dfe7; --fg:#121a23; --muted:#56657a;
+  --accent:#b5650a; --accent-ink:#ffffff; --ok:#1f8a57; --learn:#2f5fcc; color-scheme:light}}
+:root[data-theme="light"]{
+  --bg:#f3f5f8; --surface:#ffffff; --line:#d8dfe7; --fg:#121a23; --muted:#56657a;
+  --accent:#b5650a; --accent-ink:#ffffff; --ok:#1f8a57; --learn:#2f5fcc; color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+
+/* nav */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{font-family:var(--mono);font-size:14px;text-decoration:none;white-space:nowrap}
+.brand b{color:var(--accent);font-weight:500}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
+nav a{display:block;padding:6px 10px;border-radius:6px;font-size:14px;color:var(--muted);text-decoration:none;white-space:nowrap}
+nav a:hover{color:var(--fg);background:var(--surface)}
+@media (max-width:720px){nav{display:none}}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center;padding-block:72px 64px}
+.hero>*{min-width:0}
+.kicker{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,7vw,72px);line-height:1;letter-spacing:-.02em;margin:0 0 20px;text-wrap:balance}
+.lead{font-size:18px;color:var(--muted);max-width:56ch;margin:0 0 28px}
+.lead strong{color:var(--fg);font-weight:500}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:8px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);background:transparent;color:var(--fg);cursor:pointer;font-family:var(--body)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:hover{transform:translateY(-1px)}
+
+.status{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-family:var(--mono);font-size:14px}
+.status-head{display:flex;align-items:center;gap:14px;padding:18px;border-bottom:1px solid var(--line)}
+.avatar{width:64px;height:64px;flex:none;border-radius:10px;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink);font:800 24px var(--display)}
+.status-head .who{min-width:0}
+.status-head .who div:first-child{font-family:var(--body);font-weight:600;font-size:17px}
+.status-head .who div:last-child{color:var(--muted);font-size:13px}
+.status dl{margin:0;padding:6px 18px 14px}
+.status dl div{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line)}
+.status dl div:last-child{border-bottom:0}
+.status dt{color:var(--muted)}
+.status dd{margin:0;min-width:0}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:8px;box-shadow:0 0 0 0 var(--ok);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 60%,transparent)}70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+/* sections */
+section.band{padding-block:64px;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:32px;flex-wrap:wrap}
+.sec-head .tag{font-family:var(--mono);font-size:13px;color:var(--accent)}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,4vw,38px);line-height:1.1;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h3{font-family:var(--display);font-weight:700;font-size:21px;line-height:1.2;margin:0}
+p{margin:0}
+
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:40px}
+.about>*{min-width:0}
+.about p+p{margin-top:14px}
+.about .prose{max-width:62ch;font-size:17px}
+.facts{display:grid;gap:10px;align-content:start}
+.fact{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.fact span:first-child{color:var(--muted)}
+.fact span:last-child{text-align:right;font-weight:500}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.skill-col{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.skill-col header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.chip{font-family:var(--mono);font-size:12px;padding:3px 8px;border-radius:999px;border:1px solid currentColor;white-space:nowrap}
+.chip.ok{color:var(--ok)} .chip.learn{color:var(--learn)}
+.skill-col ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.skill-col li{padding-left:18px;position:relative;font-size:15px}
+.skill-col li::before{content:"";position:absolute;left:2px;top:.62em;width:7px;height:7px;border-radius:2px;background:var(--accent)}
+.skill-col.devops li::before{background:var(--learn)}
+
+/* timeline */
+.timeline{display:grid;gap:0}
+.entry{display:grid;grid-template-columns:170px 1fr;gap:28px;padding:24px 0;border-bottom:1px solid var(--line)}
+.entry:first-child{padding-top:0}
+.entry>*{min-width:0}
+.when{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:4px}
+.when .now{color:var(--ok)}
+.org{color:var(--muted);font-size:15px;margin:4px 0 10px}
+.entry ul{margin:10px 0 0;padding-left:20px;display:grid;gap:4px;font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tags span{font-family:var(--mono);font-size:12px;padding:3px 8px;border-radius:5px;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--fg)}
+
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.proj{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.proj .meta{font-family:var(--mono);font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+.proj p{font-size:15px;color:var(--muted)}
+.proj ul{margin:4px 0 0;padding-left:18px;font-size:14px;display:grid;gap:3px}
+.proj .tags{margin-top:auto;padding-top:10px}
+
+/* contact */
+.contact{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.c-item{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.c-item .lbl{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.c-item .val{font-size:17px;font-weight:600;overflow-wrap:anywhere}
+.c-item .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.small{font-size:13px;padding:7px 12px}
+.todo{color:var(--muted);font-style:italic;font-weight:400}
+
+footer{border-top:1px solid var(--line);padding-block:28px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .hero,.about{grid-template-columns:1fr;gap:36px}
+  .skills,.projects,.contact{grid-template-columns:1fr}
+  .entry{grid-template-columns:1fr;gap:6px}
+  .hero{padding-block:48px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio">sebastian<b>@</b>flores</a>
+    <nav aria-label="Secciones"><ul>
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#experiencia">Experiencia</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#educacion">Educación</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul></nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="wrap hero">
+    <div>
+      <p class="kicker">Soporte IT · Help Desk</p>
+      <h1>Sebastián Flores</h1>
+      <p class="lead">Técnico informático. Resuelvo problemas de <strong>hardware, software y usuarios</strong> todos los días, y armo las herramientas que el equipo necesita para trabajar mejor. Mi próximo paso es crecer hacia <strong>Sysadmin y DevOps</strong>.</p>
+      <div class="ctas">
+        <a class="btn primary" href="#contacto">Contactarme</a>
+        <a class="btn" href="#proyectos">Ver proyectos</a>
+        <a class="btn" href="https://www.linkedin.com/in/seba557" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/Gariko900" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <aside class="status" aria-label="Resumen">
+      <div class="status-head">
+        <div class="avatar" aria-hidden="true">SF</div>
+        <div class="who">
+          <div>Sebastián Flores</div>
+          <div>Técnico Informático</div>
+        </div>
+      </div>
+      <dl>
+        <div><dt>estado</dt><dd><span class="dot"></span>Disponible para trabajar</dd></div>
+        <div><dt>ubicación</dt><dd>Florencio Varela, Buenos Aires</dd></div>
+        <div><dt>busco</dt><dd>Soporte IT / Help Desk</dd></div>
+        <div><dt>próximo</dt><dd>Sysadmin · DevOps</dd></div>
+        <div><dt>idiomas</dt><dd>Español nativo · Inglés B2</dd></div>
+        <div><dt>estudio</dt><dd>Tec. Univ. en Programación, UTN</dd></div>
+      </dl>
+    </aside>
+  </div>
+
+  <section class="band" id="sobre-mi">
+    <div class="wrap">
+      <div class="sec-head"><span class="tag">/sobre-mi</span><h2>Un poco sobre mí</h2></div>
+      <div class="about">
+        <div class="prose">
+          <p>Trabajo como Técnico Informático en el Departamento de Modernización, Innovación y Tecnología de la Municipalidad de Florencio Varela, dando soporte a las oficinas y a los equipos de trabajo.</p>
+          <p>En paralelo llevo mi propio emprendimiento, Soporte Técnico SF, donde reparo PCs y notebooks y atiendo a clientes de la zona de punta a punta: diagnóstico, presupuesto, reparación y entrega.</p>
+          <p>Estudio la Tecnicatura Universitaria en Programación en la UTN. Eso me permite algo que me gusta mucho: cuando un proceso del día a día se puede mejorar, armo el sistema para resolverlo, como el sistema de tickets que hoy usa mi área. Para desarrollar más rápido trabajo con herramientas de IA como Claude, Microsoft Copilot y OpenAI.</p>
+        </div>
+        <div class="facts">
+          <div class="fact"><span>Rol actual</span><span>Técnico Informático</span></div>
+          <div class="fact"><span>Emprendimiento</span><span>Soporte Técnico SF</span></div>
+          <div class="fact"><span>Formación</span><span>UTN, desde 2024</span></div>
+          <div class="fact"><span>Inglés</span><span>B2</span></div>
+          <div class="fact"><span>Zona</span><span>Sur del GBA</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="habilidades">
+    <div class="wrap">
+      <div class="sec-head"><span class="tag">/habilidades</span><h2>Con qué trabajo</h2></div>
+      <div class="skills">
+        <div class="skill-col">
+          <header><h3>Soporte y Help Desk</h3><span class="chip ok">día a día</span></header>
+          <ul>
+            <li>Diagnóstico y reparación de PCs y notebooks</li>
+            <li>Instalación y configuración de Windows</li>
+            <li>Atención a usuarios y gestión de tickets</li>
+            <li>Mantenimiento preventivo y upgrades (RAM, discos)</li>
+            <li>Acceso remoto y soporte a oficinas</li>
+          </ul>
+        </div>
+        <div class="skill-col">
+          <header><h3>Desarrollo</h3><span class="chip ok">en uso</span></header>
+          <ul>
+            <li>PHP, HTML, CSS y JavaScript</li>
+            <li>Bases de datos MySQL</li>
+            <li>Servidores locales con Apache (XAMPP)</li>
+            <li>Máquinas virtuales para pruebas</li>
+            <li>Git para control de versiones</li>
+            <li>Desarrollo asistido por IA: Claude, Microsoft Copilot y OpenAI</li>
+          </ul>
+        </div>
+        <div class="skill-col devops">
+          <header><h3>Sysadmin y DevOps</h3><span class="chip learn">próximo paso</span></header>
+          <ul>
+            <li>Linux y administración de servidores</li>
+            <li>Docker y contenedores</li>
+            <li>Automatización con scripts</li>
+            <li>Nociones de CI/CD</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="experiencia">
+    <div class="wrap">
+      <div class="sec-head"><span class="tag">/experiencia</span><h2>Experiencia</h2></div>
+      <div class="timeline">
+        <article class="entry">
+          <div class="when">AÑO → <span class="now">actual</span></div>
+          <div>
+            <h3>Técnico Informático</h3>
+            <p class="org">Municipalidad de Florencio Varela · Depto. de Modernización, Innovación y Tecnología</p>
+            <ul>
+              <li>Soporte técnico a oficinas municipales: hardware, software y usuarios.</li>
+              <li>Desarrollé el sistema de tickets que usa el área de Redes para registrar y seguir cada pedido.</li>
+              <li>Registro de equipos, accesos y estado de cada intervención.</li>
+            </ul>
+            <div class="tags"><span>help desk</span><span>soporte a usuarios</span><span>redes</span><span>tickets</span></div>
+          </div>
+        </article>
+        <article class="entry">
+          <div class="when">AÑO → <span class="now">actual</span></div>
+          <div>
+            <h3>Técnico de reparación · Emprendedor</h3>
+            <p class="org">Soporte Técnico SF · Florencio Varela</p>
+            <ul>
+              <li>Reparación y mantenimiento de PCs y notebooks para particulares.</li>
+              <li>Atención al cliente completa: diagnóstico, presupuesto, reparación y entrega.</li>
+              <li>Armé mi propio sistema de órdenes de reparación con cobros y comprobantes.</li>
+            </ul>
+            <div class="tags"><span>hardware</span><span>reparación</span><span>atención al cliente</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="proyectos">
+    <div class="wrap">
+      <div class="sec-head"><span class="tag">/proyectos</span><h2>Proyectos</h2></div>
+      <div class="projects">
+        <article class="proj">
+          <span class="meta">En producción · Municipalidad</span>
+          <h3>Sistema de tickets de Redes</h3>
+          <p>Aplicación web en servidor local para que los técnicos registren y sigan cada pedido de soporte.</p>
+          <ul>
+            <li>Login de técnicos y alta protegida por clave de administrador</li>
+            <li>Fichas de clientes y oficinas, tickets con capturas adjuntas</li>
+            <li>Estadísticas por oficina y motivo, y calendario con avisos</li>
+          </ul>
+          <div class="tags"><span>php</span><span>mysql</span><span>javascript</span><span>servidor local</span></div>
+        </article>
+        <article class="proj">
+          <span class="meta">Uso propio · Taller</span>
+          <h3>Órdenes de reparación</h3>
+          <p>Sistema para gestionar los equipos que entran a mi taller, de la recepción a la entrega.</p>
+          <ul>
+            <li>Órdenes de reparación con estado de cada equipo</li>
+            <li>Presupuestos y registro de cobros</li>
+            <li>Comprobante imprimible para el cliente</li>
+          </ul>
+          <div class="tags"><span>php</span><span>mysql</span><span>xampp</span></div>
+        </article>
+        <article class="proj">
+          <span class="meta">Cliente · Óptica</span>
+          <h3>Gestión para óptica</h3>
+          <p>Sistema para una óptica que antes anotaba sus órdenes en documentos de Word.</p>
+          <ul>
+            <li>Carga y búsqueda de órdenes y clientes</li>
+            <li>Caja para registrar ventas y cobros</li>
+            <li>Estadísticas del negocio</li>
+            <li>Programa de escritorio instalado en la PC del local</li>
+          </ul>
+          <div class="tags"><span>php</span><span>sql</span><span>caja</span><span>estadísticas</span><span>app de escritorio</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="educacion">
+    <div class="wrap">
+      <div class="sec-head"><span class="tag">/educacion</span><h2>Educación</h2></div>
+      <div class="timeline">
+        <article class="entry">
+          <div class="when">2024 → <span class="now">en curso</span></div>
+          <div>
+            <h3>Tecnicatura Universitaria en Programación</h3>
+            <p class="org">Universidad Tecnológica Nacional (UTN)</p>
+            <div class="tags"><span>programación</span><span>bases de datos</span><span>sistemas</span></div>
+          </div>
+        </article>
+        <article class="entry">
+          <div class="when">Egreso 2018</div>
+          <div>
+            <h3>Bachiller en Economía y Administración de Empresas</h3>
+            <p class="org">Instituto Dr. Salvador Sallares</p>
+            <div class="tags"><span>economía</span><span>administración</span></div>
+          </div>
+        </article>
+        <article class="entry">
+          <div class="when">Idioma</div>
+          <div>
+            <h3>Inglés · nivel B2</h3>
+            <p class="org">Lectura de documentación técnica y comunicación escrita</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="contacto">
+    <div class="wrap">
+      <div class="sec-head"><span class="tag">/contacto</span><h2>Hablemos</h2></div>
+      <div class="contact">
+        <div class="c-item">
+          <span class="lbl">WhatsApp</span>
+          <span class="val" id="wa">11 4088-1839</span>
+          <div class="row">
+            <a class="btn small primary" href="https://wa.me/5491140881839" target="_blank" rel="noopener">Escribir</a>
+            <button class="btn small" type="button" data-copy="11 4088-1839">Copiar</button>
+          </div>
+        </div>
+        <div class="c-item">
+          <span class="lbl">E-mail</span>
+          <span class="val" id="mail">floresseba961@gmail.com</span>
+          <div class="row">
+            <button class="btn small" type="button" data-copy="floresseba961@gmail.com" data-target="mail">Copiar</button>
+          </div>
+        </div>
+        <div class="c-item">
+          <span class="lbl">Redes</span>
+          <span class="val"><a href="https://www.instagram.com/soportetecnicosf" target="_blank" rel="noopener">@soportetecnicosf</a></span>
+          <span class="val"><a href="https://www.linkedin.com/in/seba557" target="_blank" rel="noopener">LinkedIn · seba557</a></span>
+          <span class="val"><a href="https://github.com/Gariko900" target="_blank" rel="noopener">GitHub · Gariko900</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Sebastián Flores</span><span>Florencio Varela, Buenos Aires</span></div></footer>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var t=b.getAttribute('data-copy'),old=b.textContent;
+    function done(){b.textContent='Copiado';setTimeout(function(){b.textContent=old},1500)}
+    try{navigator.clipboard.writeText(t).then(done,function(){sel()})}catch(e){sel()}
+    function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById(b.getAttribute('data-target')||'wa'));var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  });
+});
+</script>
+</body>
+</html>
